@@ -52,5 +52,21 @@ Step : Create server actns as : app/modules/auth/actions/index.js & create onBoa
 
 To prevent multiple entry of same user -> we use upsert instead of create (22:34)
 
+Chapter : Creating header of app
+
+Step : Go to tweakcn and choose fav theme and copy code -> paste into global css for theme-inline - dark
+
+Step : Now to create header or navbar, make modules/home/components/navbar.jsx file
+
+Step : Now to download v0 svg
+
+Step : Install next themes as : npm install next-themes
+
+Step : Create a file called theme-provider.jsx inside components to write theme rovider
+
+Step : wrap children inside theme provider in layout file
+
+Step : Create another file for model toggle button inside components and use that btn with signed or signup btn in navbar.jsx
+
 
 */
