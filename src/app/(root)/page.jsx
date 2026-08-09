@@ -100,5 +100,45 @@ npm i zod
 npm i react-hoo-form
 npm i @hookform/resolvers
 
+Chapter 6 : Background jobs
+
+Bacground jobs - these are the tas that run outside of the main req/res cycle
+
+> Without
+User req -> api -> send email, process file, return res -> long res time
+
+> With
+User req -> api -> queue job(worer processes job lie email, file) -> return response -> User gets fast res as job runs in bg
+
+Services : bullMq(Nodejs), sidekiq, celery, temporal, inngest( Modern event driven bg job services)
+
+> Why are we choosing inngest?
+Serverless & event driven archietecture, scalable, developer friendly, local dev support
+In inngest, we only need to create fn & it handles everything automatically such as queue, workers 
+But in bullmq, we need to create queue, workers, etc manually
+
+> App -> trigger event -> api/inngest which handle it asynchronously -> bg job fn runs -> result
+
+> Steps to setup inngest in project:
+
+1: install inngest as : npm i inngest
+2. run inngest dev server as : npx inngest-cli@latest dev
+
+> We got this error : Error: Inngest CLI binary not found -> Because Using Node.js 24 + npm 12, which blocks package postinstall scripts by default for security. & inngest-cli requires its postinstall script to download the actual CLI binary.
+ So we allowed to install scripts by: npm install-scripts approve --all -> And then installed Inngest CLI globally while explicitly allowing its postinstall script -> using: npm install -g inngest-cli --allow-scripts=inngest-cli 
+ And now we ran : inngest dev -> to run dev server
+
+3. create an inngest client as : src/inngest/client.js 
+Inngest invokes your functions through an API endpoint at /api/inngest -> to enable it, create inngest client
+
+4. You also need to create a route handler that serves the Inngest API as : src/app/api/inngest/route.js and copy paste code from site
+
+5. Now write fn that processes a task in the background -> It waits for a trigger event, runs a sequence of steps, and returns a result.
+Create src/ingest/function.js and write fn
+
+
+ 
+
+
 
 */ 
