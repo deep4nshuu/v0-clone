@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import TextAreaAutosize from 'react-textarea-autosize'
 import { Button } from '@/components/ui/button';
 import { ArrowUpIcon, Loader2Icon } from 'lucide-react';
+import { onInvoke } from '../actions/index';
 
 const formSchema = z.object({
     content: z
@@ -93,8 +94,21 @@ const ProjectForm = () => {
         }
     }
 
+    const onInvokeAI = async() => {
+        try {
+            const res = await onInvoke();
+            console.log(res)
+            toast.success('Done')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
   return (
     <div className='space-y-8'>
+        <Button onClick={onInvokeAI}>
+            Invoke Agent
+        </Button>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3'>
             {
                 PROJECT_TEMPLATES.map((template, index) => (
