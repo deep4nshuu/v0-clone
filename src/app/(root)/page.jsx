@@ -2,7 +2,9 @@ import Image from 'next/image'
 import React from 'react'
 import ProjectForm from '../modules/home/components/project-form'
 
+
 const HomePage = () => {
+
   return (
     <div className='flex items-center justify-center w-full px-4 py-8'>
       <div className='max-w-5xl w-full'>
@@ -131,10 +133,41 @@ But in bullmq, we need to create queue, workers, etc manually
 3. create an inngest client as : src/inngest/client.js 
 Inngest invokes your functions through an API endpoint at /api/inngest -> to enable it, create inngest client
 
+> Error | Inngest Error: In cloud mode but no signing key found
+> Soln : For Local Development: INNGEST_DEV=1 or isDev: true
+Production: INNGEST_SIGNING_KEY is required to verify requests.
+Cloud Mode ≠ Local Mode. If the SDK thinks it's in Cloud Mode during development, it will throw this error.
+
 4. You also need to create a route handler that serves the Inngest API as : src/app/api/inngest/route.js and copy paste code from site
 
 5. Now write fn that processes a task in the background -> It waits for a trigger event, runs a sequence of steps, and returns a result.
 Create src/ingest/function.js and write fn
+
+
+Chapter 7: Ai Jobs
+They take bg jobs one step ahead as they allow us to run ai driven workflow in the bg
+Such as : Code generatn in sandbox, Summarizing user activity & Ai driven automatn
+
+> User req -> API -> Trigger AI job -> Inngest agent -> Ai model(gemini) -> Result
+
+Now to choose AI provider, we have plenty of option such as gpt, claude, gemini,etc
+
+Step : Go to google ai studio and create a project -> enable gemini api -> create api key -> copy it and add it to env file
+
+
+
+> AgentKit : AgentKit is a framework to build AI Agents, from single model inference calls to multi-agent systems that use tools. AgentKit enables developers to build, test, and deploy reliable AI applications at scale.
+
+Step : install inngest-agent Kit as : npm install @inngest/agent-kit@latest or latest from docs
+
+Step: Now create agent inside function.js
+
+Step : Also create an invoke fn inside modules/home/actions/index.js 
+
+Step: Now for testing agent, create a btn in page-form.jsx file & when btn clics -> agent should be called for that create fn there also to invoke
+
+> Error : Use of older gemini model which are not supported for new users,
+> Soln: Always use newer compatible models
 
 
  
