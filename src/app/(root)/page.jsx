@@ -169,9 +169,46 @@ Step: Now for testing agent, create a btn in page-form.jsx file & when btn clics
 > Error : Use of older gemini model which are not supported for new users,
 > Soln: Always use newer compatible models
 
+Chapter 8: Setting up E2B Sandboxes & Preview nextjs app in sandbox
 
+> E2B sandbox : it is an isolated env to build & test app in a sandbox
+
+Step 1 : Go to e2b.dev & create account -> dashboard -> templates -> create a new nextjs template so that agent can use, create some file, run terminal cmd 
+
+Step 2 : install e2b:  npm i e2b or latest cmd
+
+Step 3 : install e2b cli globally to manage template & sandboxes as : npm i -g @e2b/cli
+
+Step 4 : Authenticate in cli as : e2b auth login
  
+Step 5: Now list all sandboxes as : e2b sandbox list -> which will show no sandboxes found as nothing is running
 
+Step 6: Now we need to create dockerfile template which is using nextjs
+So for that create a folder in root structure as : sandbox-templates/next-js/e2b.Dockerfile -> copy paste code from
+
+Step 7: also create compile_page.sh file there to write shell cmd to run app itself
+
+Step 8: Now run docker desktop and go to sandbox-template/nextjs folder in terminal using cd cmd
+
+Step 9: now run this create template cmd to push it to e2b as : e2b template create v0-nextjs-build --cmd "/compile_page.sh" --ready-cmd "curl -f http://localhost:3000"
+
+Step 10: Now run this cmd to make your template Public : e2b template publish template_name or toogle from e2b template dashboard
+
+Step 11: now start a sandbox in inngest with new template -> for that go to e2b -> create api key -> Paste that into env file 
+
+Step 12: Write 2 fns: one for creating sandbox(use template name) and another for getting sandbox url
+
+Step 13: now run app & inngest dev server to test and then invoe agent and get new app url from inngest dev server 
+
+> Summary for this ch: we created e2b acc, then logged in with help of cli & then pushed docer template & uused inngest to spin up sandbox for us
+
+> E2B Dockerfile 
+Purpose -> Defines the environment that every E2B sandbox will be created from.
+Steps : 1.Base Image, 2.Install System Packages, 3.Copy Startup Script -> Copies the startup script into the image and makes it executable, 4. Set Working Directory ->All commands execute from /home/user, 5. Create Next.js App, 6. Initialize shadcn, 7. Install All Components
+
+> compile_page.sh 
+Purpose -> Scripts to be executed when the sandbox starts.
+What it does? -> Changes to the project directory & Starts the Next.js development server using Turbopack.
 
 
 */ 
