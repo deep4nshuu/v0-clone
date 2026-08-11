@@ -210,5 +210,21 @@ Steps : 1.Base Image, 2.Install System Packages, 3.Copy Startup Script -> Copies
 Purpose -> Scripts to be executed when the sandbox starts.
 What it does? -> Changes to the project directory & Starts the Next.js development server using Turbopack.
 
+# Chapter 9: Agent tools -> adding agent tools to sandbox such as reading, creating & updating files & adding terminals for running cmd
+
+Whenevr we need to run cmd, there is something called buffers which have 2 props: stdout(to show output on terminal), stderr(to show err on terminal)
+
+to run cmd in sandbox, we use sandbox.command.run() before it connect sandbox -> Now write buffer cmd here
+
+Steps : Go inside function.js file and create 3 agent tools(terminal, create/upd, read) using createTool(name, desc, params, handler)
+
+Step : create network fn -> maxIter: limiting no of rounds or times inngest can try running job which failed
+
+Step : create prompt.js file in src
+
+Step : add prompt, lifecycle inside agent creatn fn
+
+Step : create utils.js file inside inngest
+
 
 */ 
