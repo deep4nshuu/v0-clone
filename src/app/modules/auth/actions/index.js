@@ -2,19 +2,19 @@
 
 import db from "@/lib/db"
 import { currentUser } from "@clerk/nextjs/server"
-import { NextResponse } from "next/server"
 
 export const onBoardUser = async() => {
     try {
         const user = await currentUser()
 
         if(!user){
-            return NextResponse.json({
-                error:"Unauthorized User"
-            })
+            return {
+                success: false,
+                error: "No authorized user found"
+            }
         }
 
-        const {id, firstName, lastName, imageUrl, emailAdresses} = user;
+        const {id, firstName, lastName, imageUrl, emailAddresses} = user;
 
         const newUser = await db.user.upsert({
             where:{
@@ -26,7 +26,7 @@ export const onBoardUser = async() => {
                         ? `${firstName} ${lastName}`
                         : firstName || lastName || null,
                 image: imageUrl || null,
-                email: emailAdresses[0]?.emailAdresses || ""
+                email: emailAddresses[0]?.emailAddress || ""
             },
             create: {
                 clerkId: id,
@@ -35,7 +35,7 @@ export const onBoardUser = async() => {
                         ? `${firstName} ${lastName}`
                         : firstName || lastName || null,
                 image: imageUrl || null,
-                email: emailAdresses[0]?.emailAdresses || ""
+                email: emailAddresses[0]?.emailAddress || ""
             }
         })
 
