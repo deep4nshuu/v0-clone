@@ -124,7 +124,7 @@ But in bullmq, we need to create queue, workers, etc manually
 > Steps to setup inngest in project:
 
 1: install inngest as : npm i inngest
-2. run inngest dev server as : npx inngest-cli@latest dev
+2. run inngest dev server as : inngest dev
 
 > We got this error : Error: Inngest CLI binary not found -> Because Using Node.js 24 + npm 12, which blocks package postinstall scripts by default for security. & inngest-cli requires its postinstall script to download the actual CLI binary.
  So we allowed to install scripts by: npm install-scripts approve --all -> And then installed Inngest CLI globally while explicitly allowing its postinstall script -> using: npm install -g inngest-cli --allow-scripts=inngest-cli 
@@ -224,7 +224,28 @@ Step : create prompt.js file in src
 
 Step : add prompt, lifecycle inside agent creatn fn
 
-Step : create utils.js file inside inngest
+Step : create utils.js file ins`ide inngest
 
+
+Ch - 10: Creating projects
+
+> prompt -> create project -> projectId -> project/[id] page -> render data from bg & ai jobs
+                -> on creating project, we want to run ai jobs in parallel which will handle rest of logic
+
+Step 1: Create model named as project, message & fragement(created app url,title,summary storer) inside prisma schma
+run migrate cmd
+
+Step 2: Create projects folder inside modules and inside it create 3 folders as: actions,components,hooks
+
+Step 3: Now create a file named index.js inside projects/actions/index.js to create server actn for projects
+
+Step 4: npm i random-word-slugs @tanstack/react-query
+
+Step 5: Now write step.run cmd to run event created in fn.js 
+
+Step 6: Now start implementing tanstac query and for that create query-provider.jsx inside root component folder & wrap app layout file using it & project.js file inside projects/hooks for writing query hooks inside it
+
+Step 7: apply query hooks inside project form & remove invoke btn & fn and create new changes for btn
+install spinner from shadcn, no need as it is pre installed
 
 */ 

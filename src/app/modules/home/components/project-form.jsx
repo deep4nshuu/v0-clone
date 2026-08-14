@@ -11,6 +11,9 @@ import TextAreaAutosize from 'react-textarea-autosize'
 import { Button } from '@/components/ui/button';
 import { ArrowUpIcon, Loader2Icon } from 'lucide-react';
 import { onInvoke } from '../actions/index';
+import { useCreateProject } from '../../projects/hooks/projects';
+import { is } from 'date-fns/locale';
+import { Spinner } from '@/components/ui/spinner';
 
 const formSchema = z.object({
     content: z
@@ -74,12 +77,14 @@ const ProjectForm = () => {
 
     const [isFocused, setIsFocused] = useState(false)
     const router = useRouter()
+    const {mutateAsync, isPending} = useCreateProject()
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             content: ""
-        }
+        },
+        mode: 'onChange'
     })
 
     const handleTemplate = (prompt) => {
@@ -88,27 +93,20 @@ const ProjectForm = () => {
 
     const onSubmit = async(values) => {
         try {
-            console.log(values)
+            const res = await mutateAsync(values.content)
+            router.push(`/projects/${res.id}`)
+            toast.success('Project created successfully')
+            form.reset()
         } catch (error) {
-            
+            toast.error(error.message || 'Failed to create project')
         }
     }
 
-    const onInvokeAI = async() => {
-        try {
-            const res = await onInvoke();
-            console.log(res)
-            toast.success('Done')
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const isButtonDisabled = isPending || !form.watch('content').trim()
 
   return (
     <div className='space-y-8'>
-        <Button onClick={onInvokeAI}>
-            Invoke Agent
-        </Button>
+        {/* Template Grid */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3'>
             {
                 PROJECT_TEMPLATES.map((template, index) => (
@@ -156,7 +154,7 @@ const ProjectForm = () => {
                     <TextAreaAutosize
                         {...field}
                         // disabled={isPending}
-                        placeholder="Describe wht you want to create..."
+                        placeholder="Describe what you want to create..."
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         minRows={3}
@@ -183,10 +181,15 @@ const ProjectForm = () => {
                     &nbsp; to submit
                 </div>
                 <Button
-                    className={cn('size-8 rounded-full')}
+                    className={cn('size-8 rounded-full',
+                        isButtonDisabled && 'bg-muted-foreground border'
+                    )}
+                    disabled={isButtonDisabled}
                     type='submit'
                 >
-                    <ArrowUpIcon className='size-4' />
+                    {
+                        isPending ? (<Spinner />) : (<ArrowUpIcon className='size-4' />)
+                    }
                 </Button>
             </div>
         </form>
