@@ -1,10 +1,14 @@
 "use client";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
-import React from 'react'
+import React, { useState } from 'react'
 import ProjectHeader from './project-header';
+import MessageContainer from './message-container';
 
 const ProjectView = ({projectId}) => {
+
+  const [activeFragment, setActiveFragment] = useState(null);
+
   return (
     <div className='h-screen'>
       <ResizablePanelGroup direction='horizontal'>
@@ -15,7 +19,11 @@ const ProjectView = ({projectId}) => {
         >
             <ProjectHeader projectId={projectId}/>
 
-            {/* Todo msg container */}
+            <MessageContainer 
+              projectId={projectId}
+              activeFragment={activeFragment}
+              setActiveFragment={setActiveFragment}
+            />
         </ResizablePanel>
 
         <ResizableHandle withHandle/>
