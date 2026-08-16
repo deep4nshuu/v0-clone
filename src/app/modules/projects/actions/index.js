@@ -12,13 +12,15 @@ export const createProject = async(value) => {
     if(!user) throw new Error("Unauthorized");
 
     const newProject = await db.project.create({
-        name: generateSlug(2, {format: 'kebab'}),
-        userId: user.id,
-        messages: {
-            create: {
-                content: value,
-                role: MessageRole.USER,
-                type: MessageType.RESULT
+        data: {
+            name: generateSlug(2, {format: 'kebab'}),
+            userId: user.id,
+            messages: {
+                create: {
+                    content: value,
+                    role: MessageRole.USER,
+                    type: MessageType.RESULT
+                }
             }
         }
     })

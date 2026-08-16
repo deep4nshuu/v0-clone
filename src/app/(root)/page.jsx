@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import ProjectForm from '../modules/home/components/project-form'
+import ProjectList from '../modules/home/components/project-list'
 
 
 const HomePage = () => {
@@ -27,6 +28,8 @@ const HomePage = () => {
           <div className='max-w-3xl w-full'>
             <ProjectForm />
           </div>
+
+          <ProjectList />
         </section>
       </div>
     </div>
@@ -169,6 +172,13 @@ Step: Now for testing agent, create a btn in page-form.jsx file & when btn clics
 > Error : Use of older gemini model which are not supported for new users,
 > Soln: Always use newer compatible models
 
+
+## Error -> We can't use Agentkit as it is not compatible with gemini new models -> And give error for thought signature -> Means whie passing api req, Gemini also wants though signature with that  -> But inngest doesn't have that functionality right now
+
+
+## Solution -> Ai Agent sdk -> where we don't need of passing thought signature and handles itself -> Here it reduce the code by providing default fn and we don't need here createNetwork or createAgent as generateText handles all of them itself
+
+
 Chapter 8: Setting up E2B Sandboxes & Preview nextjs app in sandbox
 
 > E2B sandbox : it is an isolated env to build & test app in a sandbox
@@ -247,5 +257,16 @@ Step 6: Now start implementing tanstac query and for that create query-provider.
 
 Step 7: apply query hooks inside project form & remove invoke btn & fn and create new changes for btn
 install spinner from shadcn, no need as it is pre installed
+
+
+Chapter 11: Project Ui page
+
+Step : Add project list component in home page below project form and create that component in module/home/component/project-list.jsx 
+
+Step : IN project list compo, create 2 type of views -> one for desktop & other for mobile(Caroseul)
+
+Step : Create root -> projects/[projectId]/page.jsx file which will render project view based on id and create project view component inside modules/projects/components/project-view.jsx
+
+Step : Create another comp for project header in projects comp
 
 */ 
