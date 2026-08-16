@@ -289,4 +289,33 @@ Step 5: Create modules/projects/comp/message-form.jsx comp which is similar to p
 Step 6: Also create a msg-loader comp in projects and use it in msg container comp
 
 
+# Chapter 13: CodeView and Demo View
+Implement code demo view ui(sandbox url), codeview -> install prismjs & add codeview comp(file explorer, treenode, syntax highlighting)
+
+Flow : We will be on projectId page -> where we have fragment web view or msg with fragment -> when we click on that fragment -> it will show a code explorer or codeView(files) powered by syntax highlighting  & a live running demoView(sandbox url) powered by e2b sandbox on right side of page
+
+Step 1: Go to project-view comp & implement tabs  in msg container 
+
+Step 2: Create a component as : modules/project/comp/fragment-web.jsx which contains fragment views where we fetch sandbox url on iframe
+
+It will contain sandboxUrl link & iframe 
+
+Step 3: Create a hint comp in shadcn ui folder in root component & use it in fragment web comp -> this hint comp will give the hints like copy or anything like that when we hover on that
+
+Step 4: Create another tabcontent for file explorer in project view
+
+Step 5: Create file-explorer.jsx comp in module/project/comp
+
+Step 6: Create utility to convert record of files from string to tree structure inside lib/utils.js
+
+Step 7: Create a tree-view comp which will provide tree lie file system or side bar for code files such as vscode have
+
+Step 8: Also create a filebradcrumb comp inside file-explorer -> which defines how much depth/segments of file you want to show -> it will show files lie this : app/src/modules
+
+Step 9: Create a folder named code-view for showing the code files inside modules/proj/comp which have 2 files: one for comp(index.js) & another for css(code-theme.css)
+> npm i prismjs -> which is used for syntax highlighting
+
+
+
+
 */ 
