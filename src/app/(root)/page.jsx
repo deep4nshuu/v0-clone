@@ -269,4 +269,24 @@ Step : Create root -> projects/[projectId]/page.jsx file which will render proje
 
 Step : Create another comp for project header in projects comp
 
+
+
+# Chapter 12: Messages 
+Add server actn, hooks, UI related to msg
+
+Step 1: Create modules -> messages -> actions(index.js -> make 2fn as createMsg & getMsd) & hooks
+
+Step 2: Create hooks/message.js where make fn for prefetching msgs & a getMsg fn & a useCreateMsg hook
+
+Step 3: Create a message-container.jsx component inside project -> comp & use it in project-view comp
+
+> Fragement : it contains sandbox url & code url and message shows in form of fragement -> after clicking that code will be shown on right side of project view page
+
+Step 4: Create message-card.jsx comp inside modules/projects/comp/msg-card & use it in msg container comp -> create it based on role: USER or ASSISTANT -> create comp or fn inside that -> And Create fragement card comp 
+
+Step 5: Create modules/projects/comp/message-form.jsx comp which is similar to project form comp -> SO cpy-paste code and make changes in hooks -> Remove proj.template & use it in msg-container
+
+Step 6: Also create a msg-loader comp in projects and use it in msg container comp
+
+
 */ 
