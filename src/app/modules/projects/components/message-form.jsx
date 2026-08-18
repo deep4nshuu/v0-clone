@@ -3,16 +3,16 @@
 import React, { useState } from 'react'
 import z from 'zod'
 import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver} from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils';
 import TextAreaAutosize from 'react-textarea-autosize'
 import { Button } from '@/components/ui/button';
 import { ArrowUpIcon, Loader2Icon } from 'lucide-react';
-import { onInvoke } from '../actions/index';
 import { useCreateMessages } from '../../messages/hooks/messages';
 import { Spinner } from '@/components/ui/spinner';
+import { useStatus } from '../../usage/hooks/usage';
+import { Usage } from '../../usage/components/usage';
 
 const formSchema = z.object({
     content: z
@@ -26,6 +26,10 @@ const MessageForm = ({projectId}) => {
 
     const [isFocused, setIsFocused] = useState(false)
     const {mutateAsync, isPending} = useCreateMessages()
+
+    const {data:usage} = useStatus()
+
+    const showUsage = !!usage;
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -54,6 +58,11 @@ const MessageForm = ({projectId}) => {
                 isFocused && "shadow-lg ring-2 ring-primary/20"
             )}
         >
+            {
+                showUsage && (
+                    <Usage />
+                )
+            }
             <Controller
                 control={form.control}
                 name='content'

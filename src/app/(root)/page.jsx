@@ -324,7 +324,53 @@ Step 1: Create fragmentTitleGenerator Agent inside fn.js & also add fragment tit
 Step 2: Create another agent named response generator & add response prompt in prompt.js
 
 
+Chapter 15: Clerk billing
+Setup clerk billing(add free & pro plan)
+Setup pricing pagr
+implement rate limiting -> 
+add usage prisma schema, install & setup rate-limiter-flexible and add getUsageTRacker, consumeTracker, getUsageStatus and also add usage comp
 
+
+Step 1: Create a pro plan on clerk billing section
+
+Step 2: Create pricing page in (root) folder
+npm i @clerk/themes
+
+# To supress hydratn warning : add supressHydratnWarning in html tag in root layout.js file
+
+Step 3: Create features in free plan also on clerk
+
+Step 4: Create use-current-theme.js hook inside src/hooks
+
+# we use ! sign after css prop -> to make it important
+
+Step 5: Add Usage schema in prisma.schema file and then run migrate & generate cmd
+
+Step 6: Now to create rate limiting functionality which limit credit & tell to upgrade when finished, create usage.js file in lib
+Here create 3 fn as : getUsageTracker() -> to track usage of credits, etc
+npm i rate-limiter-flexible -> provide rate limits or limit credit usage
+
+Step 7: Create utility to limit credit in lib as usage.js -> Here we identify user for Pro plan using key from clerk 
+# has in auth() -> fn that checks if user has an organizatn role or custom permisn
+# then to access user plan -> we pass plan key & pass to has
+
+Step 8: Create usage module, then actions, comp, hooks
+
+Step 9: Then create a server actn to get client side status in action/index.js
+
+Step 10: Now create a hook inside hooks/usage.js
+
+Step 11: Also create usage component in comp/usage.jsx 
+
+Step 12: Go to message-form & add usage comp
+
+# Now we need to create logic of consumung credit -> so we add that logic where we are using credits
+
+Step 13: So add consumCredit fn in createMsg server actn(message/actn/index.js) & project/index.js createProject() fn
+
+Step 14: Go to project /hook & message/hook->  add status invalidateQuery 
+
+# Assignment : Add credit reducing functionality
 
 
 */ 

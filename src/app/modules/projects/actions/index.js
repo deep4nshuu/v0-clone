@@ -5,11 +5,30 @@ import db from "@/lib/db";
 import { generateSlug } from 'random-word-slugs'
 import { getCurrentUser } from "../../auth/actions";
 import { MessageRole, MessageType } from "@prisma/client";
+import { consumeCredits } from "@/lib/usage";
 
 export const createProject = async(value) => {
     const user = await getCurrentUser();
 
     if(!user) throw new Error("Unauthorized");
+
+    try {
+        await consumeCredits();
+    } catch (error) {
+        // if error occured in request or user side
+        if(error instanceof Error){
+            throw new Error({
+                code: "BAD REQUEST",
+                message: "Something went wrong"
+            })
+        }
+        else {
+            throw new Error({
+                code: "TOO MANY REQUESTS",
+                message: "Too many requests"
+            })
+        }
+    }
 
     const newProject = await db.project.create({
         data: {
