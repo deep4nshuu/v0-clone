@@ -316,6 +316,15 @@ Step 9: Create a folder named code-view for showing the code files inside module
 > npm i prismjs -> which is used for syntax highlighting
 
 
+Chapter 14: Adding Text & Response Generator Agent
+Add fragmentTitleGenerator Agent & Response Genertor Agent
+
+Step 1: Create fragmentTitleGenerator Agent inside fn.js & also add fragment title prompt in prompt.js
+
+Step 2: Create another agent named response generator & add response prompt in prompt.js
+
+
+
 
 
 */ 
