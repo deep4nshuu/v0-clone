@@ -373,4 +373,15 @@ Step 14: Go to project /hook & message/hook->  add status invalidateQuery
 # Assignment : Add credit reducing functionality
 
 
+Chapter 16: Inngest agent memory
+# Agent Memory -> It is a way to remember past msgs,actns & results from previous executn
+So when we use agent memory functionality -> it store results in Memory Store
+
+# Why do we need this in inngest?
+As inngest fns are stateless by default -> so when it finshes -> it doesn't retain any data from before
+
+Step 1: Add prev msg storing functionality in functn.js below sandboxId & also create a state using createState() -> createState creates new state for a given network. You can add any initial state data for routing, plus provide an object of previous AgentResult objects or conversation history within Message.
+
+
+
 */ 
