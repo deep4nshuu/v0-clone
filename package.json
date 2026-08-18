@@ -11,6 +11,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@clerk/nextjs": "^7.6.4",
+    "@clerk/themes": "^2.4.57",
     "@hookform/resolvers": "^5.7.1",
     "@inngest/agent-kit": "^0.13.2",
     "@prisma/adapter-pg": "^7.9.1",
@@ -33,6 +34,7 @@
     "prismjs": "^1.30.0",
     "radix-ui": "^1.6.7",
     "random-word-slugs": "^0.1.7",
+    "rate-limiter-flexible": "^11.2.0",
     "react": "19.2.4",
     "react-day-picker": "^10.0.1",
     "react-dom": "19.2.4",
@@ -58,6 +60,7 @@
     "prisma@7.9.1": true,
     "protobufjs@7.6.5": true,
     "sharp@0.34.5": true,
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "@clerk/shared@3.47.8": true
   }
 }
